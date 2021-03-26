@@ -8,7 +8,6 @@
 import UIKit
 
 class SportsViewController: UIViewController {
-    var numberofItem = 9
     
     @IBOutlet weak var sportsCollection: UICollectionView!{
         didSet{
@@ -59,6 +58,12 @@ class SportsViewController: UIViewController {
             cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
             
             return cell
+        }
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let leaguesView = storyboard?.instantiateViewController(withIdentifier: "LeaguesViewController") as! LeaguesViewController
+            leaguesView.sportName = sports[indexPath.row].strSport!
+             
+             self.navigationController?.pushViewController(leaguesView, animated: true)
         }
     }
     extension SportsViewController: UICollectionViewDelegateFlowLayout{
