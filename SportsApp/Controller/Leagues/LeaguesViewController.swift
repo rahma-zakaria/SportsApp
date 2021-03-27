@@ -8,6 +8,7 @@
 import UIKit
 
 class LeaguesViewController: UIViewController {
+    
     @IBOutlet weak var leaguesTabelView: UITableView!{
         didSet{
             leaguesTabelView.delegate = self
@@ -18,6 +19,7 @@ class LeaguesViewController: UIViewController {
     let leaguesUrl = "https://www.thesportsdb.com/api/v1/json/1/all_leagues.php"
     let leagueDetailes = "https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id="
     var leagues = [LeaguesInfoModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.global(qos: .background).async {
@@ -44,6 +46,7 @@ class LeaguesViewController: UIViewController {
             })
         }
     }
+    
     private func getMoreInfo(){
         DispatchQueue.global(qos: .background).async {
             for index in 0..<self.leagues.count{
@@ -95,7 +98,19 @@ extension LeaguesViewController :UITableViewDelegate, UITableViewDataSource{
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        pushToTeamsView(leagueName: self.leagues[indexPath.row].info.strLeague ?? "")
+    }
+    
+    func pushToTeamsView(leagueName: String){
+        let TeamsViewController: TeamsViewController = self.storyboard?.instantiateViewController(identifier: "TeamsViewController") as! TeamsViewController
+        TeamsViewController.leagueName = leagueName
+        self.navigationController?.pushViewController(TeamsViewController, animated: true)
+    }
+    
 }
+
 extension LeaguesViewController{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(tableView.frame.size.width * 0.3)

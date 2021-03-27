@@ -23,12 +23,5 @@ class YoutubeViewController: UIViewController, WKUIDelegate {
         
         //youtubeWebView.load(NSURLRequest(url: NSURL(string: youtubeLink)! as URL) as URLRequest)
     }
-    /*
-    override func loadView() {
-       let webConfiguration = WKWebViewConfiguration()
-        youtubeWebView = WKWebView(frame: .zero, configuration: webConfiguration)
-        youtubeWebView.uiDelegate = self
-       view = youtubeWebView
-    }
-*/
+    
 }
