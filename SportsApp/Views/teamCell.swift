@@ -7,7 +7,7 @@
 
 import UIKit
 
-class teamCell: UITableViewCell {
+class teamCell: UICollectionViewCell {
 
     @IBOutlet weak var teamImage: UIImageView!
     @IBOutlet weak var teamName: UILabel!
@@ -15,12 +15,6 @@ class teamCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     func updateCell(teamName: String, teamImage: String){

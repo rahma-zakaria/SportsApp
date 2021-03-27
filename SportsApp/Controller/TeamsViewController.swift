@@ -9,7 +9,8 @@ import UIKit
 
 class TeamsViewController: UIViewController {
     
-    @IBOutlet weak var teamsTV: UITableView!
+ 
+    @IBOutlet weak var teamsCV: UICollectionView!
     
     var leagueName: String?
     var teams : [[String: String?]]?
@@ -18,7 +19,7 @@ class TeamsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         requestTeams()
-        setupTableView()
+        setupCollectionView()
     }
     
     func requestTeams(){
@@ -26,24 +27,20 @@ class TeamsViewController: UIViewController {
             let url = teamsUrl + leagueName.replacingOccurrences(of: " ", with: "_")
             ApiModal.instance.getData(url: url) { (myLeagueTeams: TeamsData?, error) in
                 self.teams = myLeagueTeams?.teams
-                self.teamsTV.reloadData()
+                self.teamsCV.reloadData()
             }
         }
     }
 }
 
-extension TeamsViewController: UITableViewDelegate, UITableViewDataSource{
+extension TeamsViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
-    func setupTableView(){
-        teamsTV.delegate = self
-        teamsTV.dataSource = self
+    func setupCollectionView(){
+        teamsCV.delegate = self
+        teamsCV.dataSource = self
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 121
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let teams = self.teams{
             return teams.count
         }else{
@@ -51,18 +48,22 @@ extension TeamsViewController: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let teamCell: teamCell = tableView.dequeueReusableCell(withIdentifier: "teamCell") as! teamCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let teamCell: teamCell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! teamCell
         let team = self.teams![indexPath.row]
         teamCell.updateCell(teamName: team["strTeam"]!!, teamImage: team["strTeamLogo"]!!)
         return teamCell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let team = self.teams![indexPath.row]
+        pushToTeamDetailsView(team: team)
+    }
+    
+    func pushToTeamDetailsView(team: [String: String?]){
         let teamDetailes = storyboard?.instantiateViewController(withIdentifier: "TeamDetialesViewController") as! TeamDetialesViewController
-         
+        teamDetailes.team = team
          self.navigationController?.pushViewController(teamDetailes, animated: true)
-
     }
     
 }
