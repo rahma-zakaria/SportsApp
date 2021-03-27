@@ -54,6 +54,7 @@ class LeaguesViewController: UIViewController {
                     }else{
                         guard let leagues = myLeagueDetailes?.leagues else{print("first return");return}
                         self.leagues[index].moreInfo = leagues[0]
+                       // print(self.leagues[index].moreInfo.strYoutube as Any)
                         
                     }
                     DispatchQueue.main.async {
@@ -75,9 +76,18 @@ extension LeaguesViewController :UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaguesTabelView.dequeueReusableCell(withIdentifier: "LeaguesTableCell", for: indexPath) as! LeaguesTableCell
+        let youtubeLink = leagues[indexPath.row].moreInfo.strYoutube!
+        if (youtubeLink.isEmpty){
+            cell.youtubeButton.isHidden = true
+        } else {
+            cell.youtubeButton.isHidden = false
+            cell.youtubeButton.tag = indexPath.row
+        }
+        
         let name = leagues[indexPath.row].moreInfo.strLeague ?? "no name"
         let image = leagues[indexPath.row].moreInfo.strLogo ?? " no"
-        cell.setUpLeaguesTableCell(leagueName: name, imageName: image)
+        cell.setUpLeaguesTableCell(leagueName: name, imageName: image, youtubeLink: youtubeLink)
+    
         cell.layer.borderWidth = 3
         cell.layer.borderColor = UIColor(red: 0, green: 0, blue: 1, alpha: 1).cgColor
         cell.layer.cornerRadius = 30
@@ -85,7 +95,6 @@ extension LeaguesViewController :UITableViewDelegate, UITableViewDataSource{
         
         return cell
     }
-    
 }
 extension LeaguesViewController{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

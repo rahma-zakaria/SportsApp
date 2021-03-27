@@ -125,7 +125,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYY-h9-CZV">
                                                     <rect key="frame" x="24" y="8" width="116" height="104"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Uz-zq-PlG">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="8Uz-zq-PlG">
                                                             <rect key="frame" x="0.0" y="0.0" width="116" height="104"/>
                                                         </imageView>
                                                     </subviews>
@@ -165,6 +165,7 @@
                                             <outlet property="leagueIView" destination="MYY-h9-CZV" id="2Nn-F5-JPN"/>
                                             <outlet property="leagueImage" destination="8Uz-zq-PlG" id="WBD-AO-u5I"/>
                                             <outlet property="leagueNameLabel" destination="cLs-pJ-Ksw" id="vBz-0I-B0b"/>
+                                            <outlet property="youtubeButton" destination="pFx-EY-gGz" id="gwd-Se-jcH"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -186,6 +187,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H9I-ay-y3h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-26" y="2137"/>
+        </scene>
+        <!--Youtube View Controller-->
+        <scene sceneID="yfq-Rp-x4F">
+            <objects>
+                <viewController storyboardIdentifier="YoutubeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g3D-0z-NgY" customClass="YoutubeViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zEn-qS-Vnn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-jQ-Zx6">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="avr-qh-cYT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="avr-qh-cYT" firstAttribute="trailing" secondItem="O7j-jQ-Zx6" secondAttribute="trailing" id="c9E-Yh-hoA"/>
+                            <constraint firstItem="O7j-jQ-Zx6" firstAttribute="top" secondItem="avr-qh-cYT" secondAttribute="top" id="ilL-hO-M9I"/>
+                            <constraint firstItem="avr-qh-cYT" firstAttribute="bottom" secondItem="O7j-jQ-Zx6" secondAttribute="bottom" id="k1C-Q5-wEr"/>
+                            <constraint firstItem="O7j-jQ-Zx6" firstAttribute="leading" secondItem="avr-qh-cYT" secondAttribute="leading" id="mVE-VP-sc4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="youtubeWebView" destination="O7j-jQ-Zx6" id="pKl-YZ-orz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0pF-Np-JgC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="655" y="2137"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="C3U-op-etp">

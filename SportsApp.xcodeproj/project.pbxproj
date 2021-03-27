@@ -17,6 +17,7 @@
 		0B697D9A260C6111008D85AF /* Sports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B697D99260C6111008D85AF /* Sports.swift */; };
 		0BA5D0B4260E0D2C00D0253C /* LeaguesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5D0B2260E0D2C00D0253C /* LeaguesModel.swift */; };
 		0BA5D0B5260E0D2D00D0253C /* Leagues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5D0B3260E0D2C00D0253C /* Leagues.swift */; };
+		0BAA4FFA260F229000108F2D /* YoutubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA4FF9260F229000108F2D /* YoutubeViewController.swift */; };
 		0BD0459B260B679B00437CE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0459A260B679B00437CE6 /* AppDelegate.swift */; };
 		0BD0459D260B679B00437CE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0459C260B679B00437CE6 /* SceneDelegate.swift */; };
 		0BD0459F260B679B00437CE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0459E260B679B00437CE6 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 		0B697D99260C6111008D85AF /* Sports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sports.swift; sourceTree = "<group>"; };
 		0BA5D0B2260E0D2C00D0253C /* LeaguesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaguesModel.swift; sourceTree = "<group>"; };
 		0BA5D0B3260E0D2C00D0253C /* Leagues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Leagues.swift; sourceTree = "<group>"; };
+		0BAA4FF9260F229000108F2D /* YoutubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeViewController.swift; sourceTree = "<group>"; };
 		0BD04597260B679B00437CE6 /* SportsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BD0459A260B679B00437CE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BD0459C260B679B00437CE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				0B677E2D260E2A160079837A /* Leagues */,
 				0B677E29260E28D40079837A /* Sports */,
+				0BAA4FF9260F229000108F2D /* YoutubeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			files = (
 				0BD045B1260B741100437CE6 /* SportsCollectionCell.swift in Sources */,
 				0B677E44260E84E00079837A /* LeaguesDetailes.swift in Sources */,
+				0BAA4FFA260F229000108F2D /* YoutubeViewController.swift in Sources */,
 				0BD0459F260B679B00437CE6 /* ViewController.swift in Sources */,
 				0BA5D0B4260E0D2C00D0253C /* LeaguesModel.swift in Sources */,
 				0B677E33260E2B510079837A /* LeaguesTableCell.swift in Sources */,

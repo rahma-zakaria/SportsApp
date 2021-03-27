@@ -10,41 +10,37 @@ import UIKit
 class LeaguesTableCell: UITableViewCell {
 
     @IBOutlet weak var leagueImage: UIImageView!
-   
+    @IBOutlet weak var youtubeButton: UIButton!
     @IBOutlet weak var leagueNameLabel: UILabel!
     @IBOutlet weak var leagueIView: UIView!
+    
+    var youtubeLink: String = ""
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
     @IBAction func youtubeButton(_ sender: UIButton) {
-    }
-   /* override func layoutSubviews() {
-        super.layoutSubviews()
-
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 8, bottom: 8, right:20))
-    }*/
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        let currentView: UIViewController = self.window!.rootViewController!
         
-        //contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let youtubeView = storyboard.instantiateViewController(withIdentifier: "YoutubeViewController") as! YoutubeViewController
+        youtubeView.youtubeLink = self.youtubeLink
+        let navController = UINavigationController(rootViewController: youtubeView)
+        currentView.present(navController, animated:true, completion: nil)
     }
-    /*
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let padding = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-        bounds = bounds.inset(by: padding)
-    }
-    */
-    func setUpLeaguesTableCell(leagueName: String, imageName: String) {
+
+    func setUpLeaguesTableCell(leagueName: String, imageName: String, youtubeLink: String) {
+        // var image: UIImage = UIImage(named: "imageName")
+        leagueIView!.layer.borderWidth = 1.0
+        leagueIView!.layer.masksToBounds = false
+        leagueIView!.layer.cornerRadius = leagueIView.frame.size.height/2
+        leagueIView!.clipsToBounds = true
+        
         leagueNameLabel.text = leagueName
         leagueImage.sd_setImage(with: URL(string: imageName), placeholderImage: UIImage(named: "2"))
-        /*
-        nameLabelView.backgroundColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.7)
-        nameLabelView.layer.cornerRadius = 20
-        nameLabelView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-*/
+        self.youtubeLink = youtubeLink
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
