@@ -58,4 +58,11 @@ extension TeamsViewController: UITableViewDelegate, UITableViewDataSource{
         return teamCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let teamDetailes = storyboard?.instantiateViewController(withIdentifier: "TeamDetialesViewController") as! TeamDetialesViewController
+         
+         self.navigationController?.pushViewController(teamDetailes, animated: true)
+
+    }
+    
 }
