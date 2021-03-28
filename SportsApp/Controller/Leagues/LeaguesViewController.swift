@@ -100,13 +100,14 @@ extension LeaguesViewController :UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        pushToTeamsView(leagueName: self.leagues[indexPath.row].info.strLeague ?? "")
+        pushToTeamsView(leagueName: self.leagues[indexPath.row].info.strLeague ?? "",leagueID: self.leagues[indexPath.row].info.idLeague ?? "")
     }
     
-    func pushToTeamsView(leagueName: String){
-        let TeamsViewController: TeamsViewController = self.storyboard?.instantiateViewController(identifier: "TeamsViewController") as! TeamsViewController
-        TeamsViewController.leagueName = leagueName
-        self.navigationController?.pushViewController(TeamsViewController, animated: true)
+    func pushToTeamsView(leagueName: String, leagueID: String){
+        let LeaguesDetialesViewController: LeaguesDetialesViewController = self.storyboard?.instantiateViewController(identifier: "LeaguesDetialesViewController") as! LeaguesDetialesViewController
+        LeaguesDetialesViewController.leagueName = leagueName
+        LeaguesDetialesViewController.leagueId = leagueID
+        self.navigationController?.pushViewController(LeaguesDetialesViewController, animated: true)
     }
     
 }

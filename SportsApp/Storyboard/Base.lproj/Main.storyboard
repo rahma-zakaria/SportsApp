@@ -188,43 +188,39 @@
             </objects>
             <point key="canvasLocation" x="-26" y="2137"/>
         </scene>
-        <!--Teams View Controller-->
+        <!--Leagues Detiales View Controller-->
         <scene sceneID="Oar-cO-xw5">
             <objects>
-                <viewController storyboardIdentifier="TeamsViewController" id="wnh-lF-wzg" customClass="TeamsViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeaguesDetialesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wnh-lF-wzg" customClass="LeaguesDetialesViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kyi-rU-4GS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="r2c-Lh-yT4">
-                                <rect key="frame" x="0.0" y="632" width="414" height="230"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="r2c-Lh-yT4">
+                                <rect key="frame" x="0.0" y="683" width="414" height="179"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="230" id="oJE-qV-two"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UE9-Kf-KkT">
-                                    <size key="itemSize" width="196" height="198"/>
+                                    <size key="itemSize" width="172" height="169"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="teamCell" id="H0U-Tn-83I" customClass="teamCell" customModule="SportsApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="16" width="196" height="198"/>
+                                        <rect key="frame" x="0.0" y="5" width="172" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="REu-Uz-dFk">
-                                            <rect key="frame" x="0.0" y="0.0" width="196" height="198"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="172" height="169"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Syj-XG-Jnc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="196" height="198"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Syj-XG-Jnc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="169" height="169"/>
                                                 </imageView>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iF5-3V-bLw">
-                                                    <rect key="frame" x="0.0" y="168" width="196" height="30"/>
+                                                    <rect key="frame" x="4" y="137.5" width="164" height="27.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aB6-EL-40w">
-                                                            <rect key="frame" x="25" y="5" width="146" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aB6-EL-40w">
+                                                            <rect key="frame" x="0.0" y="0.0" width="164" height="27.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -232,21 +228,26 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="aB6-EL-40w" firstAttribute="leading" secondItem="iF5-3V-bLw" secondAttribute="leading" constant="25" id="7Sh-1Z-aNb"/>
-                                                        <constraint firstItem="aB6-EL-40w" firstAttribute="top" secondItem="iF5-3V-bLw" secondAttribute="top" constant="5" id="g1q-9K-3vf"/>
-                                                        <constraint firstAttribute="height" constant="30" id="hIG-WA-1ZI"/>
-                                                        <constraint firstAttribute="bottom" secondItem="aB6-EL-40w" secondAttribute="bottom" constant="4" id="onG-WA-u7k"/>
-                                                        <constraint firstAttribute="trailing" secondItem="aB6-EL-40w" secondAttribute="trailing" constant="25" id="pIL-vP-uOh"/>
+                                                        <constraint firstItem="aB6-EL-40w" firstAttribute="top" secondItem="iF5-3V-bLw" secondAttribute="top" id="a1A-MF-Kq1"/>
+                                                        <constraint firstAttribute="trailing" secondItem="aB6-EL-40w" secondAttribute="trailing" id="pCs-s5-7ME"/>
+                                                        <constraint firstItem="aB6-EL-40w" firstAttribute="leading" secondItem="iF5-3V-bLw" secondAttribute="leading" id="sEW-1m-pd8"/>
+                                                        <constraint firstAttribute="bottom" secondItem="aB6-EL-40w" secondAttribute="bottom" id="vsx-1T-euE"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="iF5-3V-bLw" firstAttribute="leading" secondItem="REu-Uz-dFk" secondAttribute="leading" id="Ud7-FH-ESM"/>
-                                                <constraint firstAttribute="bottom" secondItem="iF5-3V-bLw" secondAttribute="bottom" id="k2A-Ad-fD9"/>
-                                                <constraint firstAttribute="trailing" secondItem="iF5-3V-bLw" secondAttribute="trailing" id="xEm-go-3wH"/>
+                                                <constraint firstItem="Syj-XG-Jnc" firstAttribute="width" secondItem="REu-Uz-dFk" secondAttribute="height" multiplier="1:1" id="AYQ-ZK-RGW"/>
+                                                <constraint firstAttribute="trailing" secondItem="Syj-XG-Jnc" secondAttribute="trailing" id="B4L-yQ-6uT"/>
+                                                <constraint firstItem="iF5-3V-bLw" firstAttribute="leading" secondItem="REu-Uz-dFk" secondAttribute="leading" constant="4" id="D4w-bP-J2j"/>
+                                                <constraint firstAttribute="bottom" secondItem="iF5-3V-bLw" secondAttribute="bottom" constant="4" id="HDO-CN-86S"/>
+                                                <constraint firstAttribute="trailing" secondItem="iF5-3V-bLw" secondAttribute="trailing" constant="4" id="Ior-q4-uYX"/>
+                                                <constraint firstItem="Syj-XG-Jnc" firstAttribute="leading" secondItem="REu-Uz-dFk" secondAttribute="leading" id="UbH-oC-2ba"/>
+                                                <constraint firstItem="iF5-3V-bLw" firstAttribute="height" secondItem="Syj-XG-Jnc" secondAttribute="height" multiplier="0.161616" id="Uxd-2z-yXh"/>
+                                                <constraint firstAttribute="bottom" secondItem="Syj-XG-Jnc" secondAttribute="bottom" id="q9N-H0-Edb"/>
+                                                <constraint firstItem="Syj-XG-Jnc" firstAttribute="top" secondItem="REu-Uz-dFk" secondAttribute="top" id="uuZ-IT-sSd"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="196" height="198"/>
+                                        <size key="customSize" width="172" height="169"/>
                                         <connections>
                                             <outlet property="teamImage" destination="Syj-XG-Jnc" id="V73-vt-Rnd"/>
                                             <outlet property="teamName" destination="aB6-EL-40w" id="S6i-eJ-9xq"/>
@@ -254,16 +255,60 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="agW-qS-Zga" userLabel="TopCollection View">
+                                <rect key="frame" x="0.0" y="44" width="414" height="224"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ErB-Eu-Sja">
+                                    <size key="itemSize" width="196" height="198"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="teamCell" id="ipu-HD-FiN" customClass="teamCell" customModule="SportsApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="13" width="196" height="198"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fqQ-Io-4Bz">
+                                            <rect key="frame" x="0.0" y="0.0" width="196" height="198"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="196" height="198"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sdP-Gq-zCN">
+                                <rect key="frame" x="0.0" y="276" width="414" height="399"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="t9W-hw-IJj">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KsM-xE-dzx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="KsM-xE-dzx" firstAttribute="bottom" secondItem="r2c-Lh-yT4" secondAttribute="bottom" id="cqo-1u-Uc5"/>
-                            <constraint firstItem="r2c-Lh-yT4" firstAttribute="leading" secondItem="KsM-xE-dzx" secondAttribute="leading" id="f9Z-eR-sRR"/>
-                            <constraint firstAttribute="trailing" secondItem="r2c-Lh-yT4" secondAttribute="trailing" id="q7u-jG-vgr"/>
+                            <constraint firstItem="r2c-Lh-yT4" firstAttribute="trailing" secondItem="KsM-xE-dzx" secondAttribute="trailing" id="0O8-2T-6ge"/>
+                            <constraint firstItem="agW-qS-Zga" firstAttribute="trailing" secondItem="KsM-xE-dzx" secondAttribute="trailing" id="568-8T-JRT"/>
+                            <constraint firstItem="r2c-Lh-yT4" firstAttribute="bottom" secondItem="KsM-xE-dzx" secondAttribute="bottom" id="AUs-r4-PXE"/>
+                            <constraint firstItem="r2c-Lh-yT4" firstAttribute="leading" secondItem="KsM-xE-dzx" secondAttribute="leading" id="B4X-U3-Ua9"/>
+                            <constraint firstItem="agW-qS-Zga" firstAttribute="height" secondItem="Kyi-rU-4GS" secondAttribute="height" multiplier="0.25" id="EO3-ch-D4C"/>
+                            <constraint firstItem="agW-qS-Zga" firstAttribute="centerX" secondItem="Kyi-rU-4GS" secondAttribute="centerX" id="Efm-BX-Uvz"/>
+                            <constraint firstItem="KsM-xE-dzx" firstAttribute="trailing" secondItem="sdP-Gq-zCN" secondAttribute="trailing" id="Ila-6g-SpC"/>
+                            <constraint firstItem="r2c-Lh-yT4" firstAttribute="height" secondItem="Kyi-rU-4GS" secondAttribute="height" multiplier="0.2" id="MIo-Cu-dAd"/>
+                            <constraint firstItem="r2c-Lh-yT4" firstAttribute="top" secondItem="sdP-Gq-zCN" secondAttribute="bottom" constant="8" id="UD0-Ha-FZW"/>
+                            <constraint firstItem="sdP-Gq-zCN" firstAttribute="leading" secondItem="KsM-xE-dzx" secondAttribute="leading" id="Xxe-Lw-4yL"/>
+                            <constraint firstItem="agW-qS-Zga" firstAttribute="leading" secondItem="KsM-xE-dzx" secondAttribute="leading" id="gpJ-2B-aNI"/>
+                            <constraint firstItem="r2c-Lh-yT4" firstAttribute="centerX" secondItem="Kyi-rU-4GS" secondAttribute="centerX" id="grQ-U2-N9x"/>
+                            <constraint firstItem="agW-qS-Zga" firstAttribute="top" secondItem="KsM-xE-dzx" secondAttribute="top" id="izL-P8-APF"/>
+                            <constraint firstItem="sdP-Gq-zCN" firstAttribute="top" secondItem="agW-qS-Zga" secondAttribute="bottom" constant="8" id="pjZ-WI-hc1"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="resultsCollection" destination="sdP-Gq-zCN" id="Fxx-vK-z70"/>
                         <outlet property="teamsCV" destination="r2c-Lh-yT4" id="c17-Qz-kdf"/>
                     </connections>
                 </viewController>
@@ -427,6 +472,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QMp-3n-Xmj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="640.57971014492762" y="2801.7857142857142"/>
+        </scene>
+        <!--Social View Controller-->
+        <scene sceneID="LPu-EI-SeT">
+            <objects>
+                <viewController storyboardIdentifier="SocialViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6BF-nB-5Qk" customClass="SocialViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JBa-iR-qF5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1j-wz-3xn">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eYL-X8-o2b"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="H1j-wz-3xn" firstAttribute="leading" secondItem="eYL-X8-o2b" secondAttribute="leading" id="SbL-8I-vs8"/>
+                            <constraint firstItem="H1j-wz-3xn" firstAttribute="top" secondItem="eYL-X8-o2b" secondAttribute="top" id="Tco-eY-X7U"/>
+                            <constraint firstItem="H1j-wz-3xn" firstAttribute="bottom" secondItem="eYL-X8-o2b" secondAttribute="bottom" id="qpa-q8-qDK"/>
+                            <constraint firstItem="H1j-wz-3xn" firstAttribute="trailing" secondItem="eYL-X8-o2b" secondAttribute="trailing" id="qsw-U5-uek"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="socialWebView" destination="H1j-wz-3xn" id="heW-Nl-vaY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hKK-SK-0od" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1275.3623188405797" y="2801.7857142857142"/>
         </scene>
         <!--Youtube View Controller-->
         <scene sceneID="yfq-Rp-x4F">

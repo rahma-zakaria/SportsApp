@@ -34,14 +34,21 @@ class TeamDetialesViewController: UIViewController {
     }
     
     @IBAction func faceBookButton(_ sender: Any) {
-        
+        let socialLink = (self.team!["strFacebook"] ?? "")!
+        pushToSocialView(link: socialLink)
     }
-    
     @IBAction func instgramButton(_ sender: Any) {
-        
+        let socialLink = (self.team!["strInstagram"] ?? "")!
+        pushToSocialView(link: socialLink)
     }
     @IBAction func twitterButton(_ sender: Any) {
-        
+        let socialLink = (self.team!["strTwitter"] ?? "")!
+        pushToSocialView(link: socialLink)
+    }
+    func pushToSocialView(link: String){
+        let SocialView = storyboard?.instantiateViewController(withIdentifier: "SocialViewController") as! SocialViewController
+        SocialView.socialLink = link
+         self.navigationController?.pushViewController(SocialView, animated: true)
     }
 
 }
