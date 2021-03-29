@@ -22,6 +22,7 @@ class LeaguesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.leaguesTabelView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 8, right: 8)
         DispatchQueue.global(qos: .background).async {
             ApiModal.instance.getData(url: self.leaguesUrl, completion:{(myLeague: LeaguesModel?,error) in
                 if let myError = error{
@@ -36,8 +37,6 @@ class LeaguesViewController: UIViewController {
                             self.leagues.append(league)
                         }
                     }
-                    print("\nleagues count")
-                    print(self.leagues.count)
                     self.getMoreInfo()
                     DispatchQueue.main.async {
                         self.leaguesTabelView.reloadData()
@@ -100,13 +99,17 @@ extension LeaguesViewController :UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        pushToTeamsView(leagueName: self.leagues[indexPath.row].info.strLeague ?? "",leagueID: self.leagues[indexPath.row].info.idLeague ?? "")
+        let name = self.leagues[indexPath.row].info.strLeague ?? ""
+        let id = self.leagues[indexPath.row].info.idLeague ?? ""
+        let image = self.leagues[indexPath.row].moreInfo.strLogo ?? ""
+        let youtube = self.leagues[indexPath.row].moreInfo.strYoutube ?? ""
+        let myLeague = FavoriteLeague(id: id, name: name, image: image, youtubeUrl:youtube)
+        pushToTeamsView(myLeague: myLeague)
     }
     
-    func pushToTeamsView(leagueName: String, leagueID: String){
+    func pushToTeamsView(myLeague: FavoriteLeague){
         let LeaguesDetialesViewController: LeaguesDetialesViewController = self.storyboard?.instantiateViewController(identifier: "LeaguesDetialesViewController") as! LeaguesDetialesViewController
-        LeaguesDetialesViewController.leagueName = leagueName
-        LeaguesDetialesViewController.leagueId = leagueID
+        LeaguesDetialesViewController.myLeague = myLeague
         self.navigationController?.pushViewController(LeaguesDetialesViewController, animated: true)
     }
     

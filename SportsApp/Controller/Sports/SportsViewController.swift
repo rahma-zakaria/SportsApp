@@ -22,21 +22,21 @@ class SportsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.global(qos: .background).async {
-            ApiModal.instance.getData(url: self.sportsUrl, completion:{(mySports: SportsModel?,error) in
-                if let myError = error{
-                    print(myError)
-                }else{
-                    guard let sports = mySports else {return}
-                   // self.sportsData = sports
-                    guard let mySport = sports.sports  else { return }
-                    self.sports = mySport
-                    print("my sports")
-                    print(self.sports.count)
-                    DispatchQueue.main.async {
-                        self.sportsCollection.reloadData()
-                    }
-                }
-            })
+                   ApiModal.instance.getData(url: self.sportsUrl, completion:{(mySports: SportsModel?,error) in
+                       if let myError = error{
+                           print(myError)
+                       }else{
+                           guard let sports = mySports else {return}
+                          // self.sportsData = sports
+                           guard let mySport = sports.sports  else { return }
+                           self.sports = mySport
+                           print("my sports")
+                           print(self.sports.count)
+                           DispatchQueue.main.async {
+                               self.sportsCollection.reloadData()
+                           }
+                       }
+                   })
             // Do any additional setup after loading the view.
         }
     }

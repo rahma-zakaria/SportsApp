@@ -10,25 +10,49 @@ import UIKit
 class LeaguesDetialesViewController: UIViewController {
     
  
+    @IBOutlet weak var favoriteButton: UIBarButtonItem!
     @IBOutlet weak var teamsCV: UICollectionView!
     @IBOutlet weak var resultsCollection: UICollectionView!
     
-    var leagueName: String?
-    var leagueId: String?
+    var myLeague: FavoriteLeague?
+
     var teams : [[String: String?]]?
     var events = [Events]()
     let teamsUrl = "https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?l="
     let eventsUrl = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id="
     
+    let coreData = CoreDataModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if coreData.isLeagueInFavorate(ID: (myLeague?.id)!) {
+            favoriteButton.image = UIImage(systemName: "heart.fill")
+        }else{
+            favoriteButton.image = UIImage(systemName: "heart")
+        }
+        favoriteButton!.tintColor = .red
+        
+        self.navigationItem.rightBarButtonItem = favoriteButton
+        
         requestTeams()
         requestEvents()
         setupCollectionView()
     }
     
+    @IBAction func favoriteAction(_ sender: UIBarButtonItem) {
+        if coreData.isLeagueInFavorate(ID: (myLeague?.id)!) {
+            print("delete")
+            favoriteButton.image = UIImage(systemName: "heart")
+            coreData.deleteLeague(leagueID: (myLeague?.id)!)
+        }else{
+            print("add")
+            favoriteButton.image = UIImage(systemName: "heart.fill")
+            coreData.addLeague(league: myLeague!)
+        }
+    }
+    
     func requestTeams(){
-        if let leagueName = self.leagueName{
+        if let leagueName = myLeague?.name{
             let url = teamsUrl + leagueName.replacingOccurrences(of: " ", with: "_")
             ApiModal.instance.getData(url: url) { (myLeagueTeams: TeamsData?, error) in
                 self.teams = myLeagueTeams?.teams
@@ -37,7 +61,7 @@ class LeaguesDetialesViewController: UIViewController {
         }
     }
     func requestEvents(){
-        if let leagueId = self.leagueId{
+        if let leagueId = myLeague?.id{
             let url = eventsUrl + leagueId
                 ApiModal.instance.getData(url: url, completion:{(myEvents: EventsModel?,error) in
                     if let myError = error{
