@@ -20,7 +20,7 @@ class EventCollectionCell: UICollectionViewCell {
     @IBOutlet weak var teamBResView: UIView!
     @IBOutlet weak var labelARes: UILabel!
     @IBOutlet weak var labelBRes: UILabel!
-
+    
     
     
     override func awakeFromNib() {
@@ -85,5 +85,5 @@ class EventCollectionCell: UICollectionViewCell {
             self.labelBRes.text = "N"
         }
     }
- 
+    
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class TeamDetialesViewController: UIViewController {
-
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var teamLogoImage: UIImageView!
     @IBOutlet weak var teamNameLabel: UILabel!
@@ -48,7 +48,7 @@ class TeamDetialesViewController: UIViewController {
     func pushToSocialView(link: String){
         let SocialView = storyboard?.instantiateViewController(withIdentifier: "SocialViewController") as! SocialViewController
         SocialView.socialLink = link
-         self.navigationController?.pushViewController(SocialView, animated: true)
+        self.navigationController?.pushViewController(SocialView, animated: true)
     }
-
+    
 }

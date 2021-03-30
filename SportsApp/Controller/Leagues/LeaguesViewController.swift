@@ -15,6 +15,7 @@ class LeaguesViewController: UIViewController {
             leaguesTabelView.dataSource = self
         }
     }
+    
     var sportName:String!
     let leaguesUrl = "https://www.thesportsdb.com/api/v1/json/1/all_leagues.php"
     let leagueDetailes = "https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id="
@@ -22,7 +23,9 @@ class LeaguesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.leaguesTabelView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 8, right: 8)
+        self.title = sportName
+        self.leaguesTabelView.backgroundColor = UIColor(named: "background")
+        leaguesTabelView.separatorColor = .none
         DispatchQueue.global(qos: .background).async {
             ApiModal.instance.getData(url: self.leaguesUrl, completion:{(myLeague: LeaguesModel?,error) in
                 if let myError = error{
@@ -50,14 +53,11 @@ class LeaguesViewController: UIViewController {
         DispatchQueue.global(qos: .background).async {
             for index in 0..<self.leagues.count{
                 ApiModal.instance.getData(url: self.leagueDetailes + self.leagues[index].info.idLeague!, completion:{(myLeagueDetailes: LeaguesDetailesModel?,error) in
-                    //print(self.leagueDetailes + self.leagues[index].info.idLeague!)
                     if let myError = error{
                         print(myError)
                     }else{
-                        guard let leagues = myLeagueDetailes?.leagues else{print("first return");return}
+                        guard let leagues = myLeagueDetailes?.leagues else{return}
                         self.leagues[index].moreInfo = leagues[0]
-                       // print(self.leagues[index].moreInfo.strYoutube as Any)
-                        
                     }
                     DispatchQueue.main.async {
                         self.leaguesTabelView.reloadData()
@@ -73,50 +73,61 @@ class LeaguesViewController: UIViewController {
 
 extension LeaguesViewController :UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
         return leagues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaguesTabelView.dequeueReusableCell(withIdentifier: "LeaguesTableCell", for: indexPath) as! LeaguesTableCell
-        let youtubeLink = leagues[indexPath.row].moreInfo.strYoutube!
+        let youtubeLink = leagues[indexPath.section].moreInfo.strYoutube!
         if (youtubeLink.isEmpty){
             cell.youtubeButton.isHidden = true
         } else {
             cell.youtubeButton.isHidden = false
-            cell.youtubeButton.tag = indexPath.row
+            cell.youtubeButton.tag = indexPath.section
         }
         
-        let name = leagues[indexPath.row].moreInfo.strLeague ?? "no name"
-        let image = leagues[indexPath.row].moreInfo.strBadge ?? " no"
+        let name = leagues[indexPath.section].moreInfo.strLeague ?? "no name"
+        let image = leagues[indexPath.section].moreInfo.strBadge ?? " no"
         cell.setUpLeaguesTableCell(leagueName: name, imageName: image, youtubeLink: youtubeLink)
-    
-        cell.layer.borderWidth = 3
-        cell.layer.borderColor = UIColor(red: 0, green: 0, blue: 1, alpha: 1).cgColor
-        cell.layer.cornerRadius = 30
-        cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
+        
+        cell.layer.borderWidth = 4
+        cell.layer.borderColor = UIColor(named: "border")?.cgColor
+        cell.backgroundColor = UIColor(named: "background")
+        cell.layer.cornerRadius = 32
+        cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner,.layerMaxXMinYCorner]
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let name = self.leagues[indexPath.row].info.strLeague ?? ""
-        let id = self.leagues[indexPath.row].info.idLeague ?? ""
-        let image = self.leagues[indexPath.row].moreInfo.strBadge ?? ""
-        let youtube = self.leagues[indexPath.row].moreInfo.strYoutube ?? ""
+        let name = self.leagues[indexPath.section].info.strLeague ?? ""
+        let id = self.leagues[indexPath.section].info.idLeague ?? ""
+        let image = self.leagues[indexPath.section].moreInfo.strBadge ?? ""
+        let youtube = self.leagues[indexPath.section].moreInfo.strYoutube ?? ""
         let myLeague = FavoriteLeague(id: id, name: name, image: image, youtubeUrl:youtube)
-        pushToTeamsView(myLeague: myLeague)
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "ShowDetailes", sender: myLeague)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetailes" {
+            if let detailesVC = segue.destination as? LeaguesDetialesViewController{
+                let league = sender as? FavoriteLeague
+                detailesVC.myLeague = league
+            }
+        }
     }
     
-    func pushToTeamsView(myLeague: FavoriteLeague){
-        let LeaguesDetialesViewController: LeaguesDetialesViewController = self.storyboard?.instantiateViewController(identifier: "LeaguesDetialesViewController") as! LeaguesDetialesViewController
-        LeaguesDetialesViewController.myLeague = myLeague
-        self.navigationController?.pushViewController(LeaguesDetialesViewController, animated: true)
-    }
     
 }
 
 extension LeaguesViewController{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(tableView.frame.size.width * 0.3)
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 8
     }
 }

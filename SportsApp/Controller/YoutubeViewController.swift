@@ -9,19 +9,17 @@ import UIKit
 import WebKit
 
 class YoutubeViewController: UIViewController, WKUIDelegate {
-
+    
     @IBOutlet var youtubeWebView: WKWebView!
     var youtubeLink:String = ""
-
+    
     override func viewDidLoad() {
-       super.viewDidLoad()
-       let myURL = URL(string: "https://\(youtubeLink)")
-        print(youtubeLink)
+        super.viewDidLoad()
+        let myURL = URL(string: "https://\(youtubeLink)")
         
-       let myRequest = URLRequest(url: myURL!)
+        let myRequest = URLRequest(url: myURL!)
         youtubeWebView.load(myRequest)
         
-        //youtubeWebView.load(NSURLRequest(url: NSURL(string: youtubeLink)! as URL) as URLRequest)
     }
     
 }
