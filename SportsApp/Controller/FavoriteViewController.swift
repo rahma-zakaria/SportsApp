@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Reachability
 
 class FavoriteViewController: UIViewController {
     @IBOutlet weak var leaguesTabelView: UITableView!{
@@ -15,12 +16,25 @@ class FavoriteViewController: UIViewController {
     }
 }
 var leagues = [FavoriteLeague]()
+let reachability = try! Reachability()
+    var isConected: Bool?
     
 override func viewDidLoad() {
-    self.leaguesTabelView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 8, right: 8)
     super.viewDidLoad()
 }
     override func viewWillAppear(_ animated: Bool) {
+        
+        reachability.whenReachable = { reachability in
+            self.isConected = true
+        }
+        reachability.whenUnreachable = { _ in
+            self.isConected = false
+        }
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
         let coreData = CoreDataModel()
         leagues = []
         print(leagues.count)
@@ -28,9 +42,11 @@ override func viewDidLoad() {
         print(leagues.count)
         leaguesTabelView.reloadData()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        reachability.stopNotifier()
+    }
 
 }
-
 
 extension FavoriteViewController :UITableViewDelegate, UITableViewDataSource{
 func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,12 +76,20 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 }
 
 func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let name = self.leagues[indexPath.row].name ?? ""
-    let id = self.leagues[indexPath.row].id ?? ""
-    let image = self.leagues[indexPath.row].image ?? ""
-    let youtube = self.leagues[indexPath.row].youtubeUrl ?? ""
-    let myLeague = FavoriteLeague(id: id, name: name, image: image, youtubeUrl:youtube)
-    pushToTeamsView(myLeague: myLeague)
+    if isConected! {
+        let name = self.leagues[indexPath.row].name ?? ""
+        let id = self.leagues[indexPath.row].id ?? ""
+        let image = self.leagues[indexPath.row].image ?? ""
+        let youtube = self.leagues[indexPath.row].youtubeUrl ?? ""
+        let myLeague = FavoriteLeague(id: id, name: name, image: image, youtubeUrl:youtube)
+        pushToTeamsView(myLeague: myLeague)
+    }else{
+        print("hi")
+        let alert = UIAlertController(title: "No Connection", message: "Pleas Connect Internet And Connect Agian", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
 }
 
 func pushToTeamsView(myLeague: FavoriteLeague){

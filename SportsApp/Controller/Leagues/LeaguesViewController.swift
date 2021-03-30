@@ -87,7 +87,7 @@ extension LeaguesViewController :UITableViewDelegate, UITableViewDataSource{
         }
         
         let name = leagues[indexPath.row].moreInfo.strLeague ?? "no name"
-        let image = leagues[indexPath.row].moreInfo.strLogo ?? " no"
+        let image = leagues[indexPath.row].moreInfo.strBadge ?? " no"
         cell.setUpLeaguesTableCell(leagueName: name, imageName: image, youtubeLink: youtubeLink)
     
         cell.layer.borderWidth = 3
@@ -101,7 +101,7 @@ extension LeaguesViewController :UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let name = self.leagues[indexPath.row].info.strLeague ?? ""
         let id = self.leagues[indexPath.row].info.idLeague ?? ""
-        let image = self.leagues[indexPath.row].moreInfo.strLogo ?? ""
+        let image = self.leagues[indexPath.row].moreInfo.strBadge ?? ""
         let youtube = self.leagues[indexPath.row].moreInfo.strYoutube ?? ""
         let myLeague = FavoriteLeague(id: id, name: name, image: image, youtubeUrl:youtube)
         pushToTeamsView(myLeague: myLeague)

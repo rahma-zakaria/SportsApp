@@ -6,6 +6,7 @@ target 'SportsApp' do
   # Pods for SportsApp
 
 pod 'Alamofire', '~> 4.8'
+pod 'ReachabilitySwift'
 pod 'SDWebImage'
 
 end

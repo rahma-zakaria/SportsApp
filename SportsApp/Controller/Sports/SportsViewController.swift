@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import Reachability
 
 class SportsViewController: UIViewController {
+    let reachability = try! Reachability()
     
     @IBOutlet weak var sportsCollection: UICollectionView!{
         didSet{
@@ -37,11 +39,26 @@ class SportsViewController: UIViewController {
                            }
                        }
                    })
-            // Do any additional setup after loading the view.
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        reachability.whenReachable = { reachability in
+            self.tabBarController?.selectedIndex = 0
+        }
+        reachability.whenUnreachable = { _ in
+            self.tabBarController?.selectedIndex = 1
+        }
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        reachability.stopNotifier()
+    }
 }
-    
+
     extension SportsViewController: UICollectionViewDelegate, UICollectionViewDataSource{
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return sports.count
