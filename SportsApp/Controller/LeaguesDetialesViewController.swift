@@ -9,10 +9,11 @@ import UIKit
 
 class LeaguesDetialesViewController: UIViewController {
     
- 
     @IBOutlet weak var favoriteButton: UIBarButtonItem!
+    
     @IBOutlet weak var teamsCV: UICollectionView!
     @IBOutlet weak var resultsCollection: UICollectionView!
+    @IBOutlet weak var upCommingCollection: UICollectionView!
     
     var myLeague: FavoriteLeague?
 
@@ -54,6 +55,8 @@ class LeaguesDetialesViewController: UIViewController {
     func requestTeams(){
         if let leagueName = myLeague?.name{
             let url = teamsUrl + leagueName.replacingOccurrences(of: " ", with: "_")
+            print ("\n\n team")
+            print(url)
             ApiModal.instance.getData(url: url) { (myLeagueTeams: TeamsData?, error) in
                 self.teams = myLeagueTeams?.teams
                 self.teamsCV.reloadData()
@@ -63,6 +66,9 @@ class LeaguesDetialesViewController: UIViewController {
     func requestEvents(){
         if let leagueId = myLeague?.id{
             let url = eventsUrl + leagueId
+            print("\n\n\n")
+            print(url)
+            print("\n\n\n")
                 ApiModal.instance.getData(url: url, completion:{(myEvents: EventsModel?,error) in
                     if let myError = error{
                         print(myError)
@@ -70,9 +76,8 @@ class LeaguesDetialesViewController: UIViewController {
                         guard let events = myEvents else {return}
                         guard let myEvent = events.events  else { return }
                         self.events = myEvent
-                        print("my events")
-                        print(self.events.count)
                         self.resultsCollection.reloadData()
+                        self.upCommingCollection.reloadData()
                     }
                 })
         }
@@ -87,13 +92,16 @@ extension LeaguesDetialesViewController: UICollectionViewDelegate, UICollectionV
         resultsCollection.delegate = self
         resultsCollection.dataSource = self
         resultsCollection.register(UINib(nibName: "EventCollectionCell", bundle: nil), forCellWithReuseIdentifier: "EventCollectionCell")
+        upCommingCollection.delegate = self
+        upCommingCollection.dataSource = self
+        upCommingCollection.register(UINib(nibName: "upcommingCollectionCell", bundle: nil), forCellWithReuseIdentifier: "upcommingCollectionCell")
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
         case 0:
             //frist here
-            return 0
+            return events.count
         case 1:
             //events here
             print("in case 1 >>")
@@ -108,13 +116,30 @@ extension LeaguesDetialesViewController: UICollectionViewDelegate, UICollectionV
         
     }
     
+    func getTeamLogo(id: String) ->String{
+        let num = self.teams?.count ?? 0
+        for index in 0..<num{
+            let team = self.teams![index]
+            if(team["idTeam"] == id){
+                return team["strTeamLogo"]! ?? ""
+            }
+        }
+        return ""
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView.tag {
-
+        case 0 :
+            let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcommingCollectionCell", for: indexPath) as! upcommingCollectionCell
+            let event = events[indexPath.row]
+            eventCell.displayImgs(teamAURL: self.getTeamLogo(id: event.idHomeTeam!), teamBURL: self.getTeamLogo(id: event.idAwayTeam!))
+            eventCell.displayNames(teamA: event.strHomeTeam ?? "", teamB: event.strAwayTeam ?? "")
+            eventCell.displayDateTime(date: event.dateEvent, time: event.strTime)
+            return eventCell
         case 1:
             let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCollectionCell", for: indexPath) as! EventCollectionCell
             let event = events[indexPath.row]
-            eventCell.displayImgs(teamAURL: event.idHomeTeam, teamBURL: event.idAwayTeam)
+            eventCell.displayImgs(teamAURL: self.getTeamLogo(id: event.idHomeTeam!), teamBURL: self.getTeamLogo(id: event.idAwayTeam!))
             eventCell.displayNames(teamA: event.strHomeTeam ?? "", teamB: event.strAwayTeam ?? "")
             eventCell.displayResults(teamARes: event.intHomeScore, teamBRes: event.intAwayScore)
             eventCell.displayDateTime(date: event.dateEvent, time: event.strTime)
@@ -153,17 +178,24 @@ extension LeaguesDetialesViewController: UICollectionViewDelegateFlowLayout{
     
      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView.tag {
+        case 0:
+            return CGSize(width: collectionView.frame.size.width * 0.4, height: collectionView.frame.size.width * 0.3)
         case 1:
             return CGSize(width: ((self.view.frame.size.width/2) - 16), height: (self.view.frame.size.width/3))
 
         default:
-            return CGSize(width: collectionView.frame.size.width * 0.3, height: collectionView.frame.size.width * 0.23)
+            return CGSize(width: collectionView.frame.size.width * 0.3, height: collectionView.frame.size.width * 0.26)
         }
 
      }
      
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        switch collectionView.tag {
+        case 3:
+            return 24
+        default:
+            return 8
+        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8

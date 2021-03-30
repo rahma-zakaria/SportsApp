@@ -21,6 +21,8 @@
 		0B6932082610912F00749023 /* EventCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B6932062610912F00749023 /* EventCollectionCell.xib */; };
 		0B6932112610AB0A00749023 /* EventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B69320F2610AB0A00749023 /* EventsModel.swift */; };
 		0B6932122610AB0A00749023 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6932102610AB0A00749023 /* Events.swift */; };
+		0B6968B32613151C004FE5BC /* upcommingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6968B12613151C004FE5BC /* upcommingCollectionCell.swift */; };
+		0B6968B42613151C004FE5BC /* upcommingCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B6968B22613151C004FE5BC /* upcommingCollectionCell.xib */; };
 		0B697D82260C53AC008D85AF /* ApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B697D81260C53AC008D85AF /* ApiModel.swift */; };
 		0B697D96260C6038008D85AF /* SportsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B697D95260C6038008D85AF /* SportsModel.swift */; };
 		0B697D9A260C6111008D85AF /* Sports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B697D99260C6111008D85AF /* Sports.swift */; };
@@ -56,6 +58,8 @@
 		0B6932062610912F00749023 /* EventCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCollectionCell.xib; sourceTree = "<group>"; };
 		0B69320F2610AB0A00749023 /* EventsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsModel.swift; sourceTree = "<group>"; };
 		0B6932102610AB0A00749023 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		0B6968B12613151C004FE5BC /* upcommingCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = upcommingCollectionCell.swift; sourceTree = "<group>"; };
+		0B6968B22613151C004FE5BC /* upcommingCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = upcommingCollectionCell.xib; sourceTree = "<group>"; };
 		0B697D81260C53AC008D85AF /* ApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiModel.swift; sourceTree = "<group>"; };
 		0B697D95260C6038008D85AF /* SportsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SportsModel.swift; sourceTree = "<group>"; };
 		0B697D99260C6111008D85AF /* Sports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sports.swift; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 		0919BD99260F86650092FE80 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				0B6968B22613151C004FE5BC /* upcommingCollectionCell.xib */,
 				0BD045A5260B679E00437CE6 /* LaunchScreen.storyboard */,
 				0B6932062610912F00749023 /* EventCollectionCell.xib */,
 				0BD045A0260B679B00437CE6 /* Main.storyboard */,
@@ -248,6 +253,7 @@
 				0BD045B0260B741100437CE6 /* SportsCollectionCell.swift */,
 				0919BDA4260FA39D0092FE80 /* teamCell.swift */,
 				0B6932052610912F00749023 /* EventCollectionCell.swift */,
+				0B6968B12613151C004FE5BC /* upcommingCollectionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				0BD045A4260B679E00437CE6 /* Assets.xcassets in Resources */,
 				0B6932082610912F00749023 /* EventCollectionCell.xib in Resources */,
 				0BD045A2260B679B00437CE6 /* Main.storyboard in Resources */,
+				0B6968B42613151C004FE5BC /* upcommingCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +407,7 @@
 				0B677E44260E84E00079837A /* LeaguesDetailes.swift in Sources */,
 				0BAA4FFA260F229000108F2D /* YoutubeViewController.swift in Sources */,
 				0B6932122610AB0A00749023 /* Events.swift in Sources */,
+				0B6968B32613151C004FE5BC /* upcommingCollectionCell.swift in Sources */,
 				0BA5D0B4260E0D2C00D0253C /* LeaguesModel.swift in Sources */,
 				0919BDA8260FA5CB0092FE80 /* LeaguesDetialesViewController.swift in Sources */,
 				0B677E33260E2B510079837A /* LeaguesTableCell.swift in Sources */,
