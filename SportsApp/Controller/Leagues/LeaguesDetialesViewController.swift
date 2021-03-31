@@ -46,11 +46,9 @@ class LeaguesDetialesViewController: UIViewController {
     
     @IBAction func favoriteAction(_ sender: UIBarButtonItem) {
         if coreData.isLeagueInFavorate(ID: (myLeague?.id)!) {
-            print("delete")
             favoriteButton.image = UIImage(systemName: "heart")
             coreData.deleteLeague(leagueID: (myLeague?.id)!)
         }else{
-            print("add")
             favoriteButton.image = UIImage(systemName: "heart.fill")
             coreData.addLeague(league: myLeague!)
         }
@@ -60,44 +58,56 @@ class LeaguesDetialesViewController: UIViewController {
         DispatchQueue.global(qos: .background).async {
             if let leagueName = self.myLeague?.name{
                 let url = self.teamsUrl + leagueName.replacingOccurrences(of: " ", with: "_")
-            ApiModal.instance.getData(url: url) { (myLeagueTeams: TeamsData?, error) in
-                if let myError = error{
-                    print(myError)
-                }else{
-                self.teams = myLeagueTeams?.teams
-            }
-            DispatchQueue.main.async {
-                self.teamsCV.reloadData()
-                self.indicator.stopAnimating()
+                ApiModal.instance.getData(url: url) { (myLeagueTeams: TeamsData?, error) in
+                    if let myError = error{
+                        print(myError)
+                    }else{
+                        self.teams = myLeagueTeams?.teams
+                    }
+                    DispatchQueue.main.async {
+                        self.teamsCV.reloadData()
+                        self.indicator.stopAnimating()
+                        if (self.teams == nil) {
+                            let image = UIImage(named: "notFound")
+                            let imageView = UIImageView(image: image!)
+                            imageView.frame = self.view.frame
+                            self.view.addSubview(imageView)
+                        }
+                    }
+                }
             }
         }
-            }
-    }
     }
     func requestEvents(){
         DispatchQueue.global(qos: .background).async {
             if let leagueId = self.myLeague?.id{
                 let url = self.eventsUrl + leagueId
-            ApiModal.instance.getData(url: url, completion:{(myEvents: EventsModel?,error) in
-                if let myError = error{
-                    print(myError)
-                }else{
-                    guard let events = myEvents else {return}
-                    guard let myEvent = events.events  else { return }
-                    self.events = myEvent
-                   
-                }
-                DispatchQueue.main.async {
-                    self.resultsCollection.reloadData()
-                    self.upCommingCollection.reloadData()
-                    self.indicator.stopAnimating()
-                }
-            })
+                ApiModal.instance.getData(url: url, completion:{(myEvents: EventsModel?,error) in
+                    if let myError = error{
+                        print(myError)
+                    }else{
+                        guard let events = myEvents else {return}
+                        guard let myEvent = events.events  else { return }
+                        self.events = myEvent
+                        
+                    }
+                    DispatchQueue.main.async {
+                        self.resultsCollection.reloadData()
+                        self.upCommingCollection.reloadData()
+                        self.indicator.stopAnimating()
+                        if (self.events.count == 0) {
+                            let image = UIImage(named: "notFound")
+                            let imageView = UIImageView(image: image!)
+                            imageView.frame = self.view.frame
+                            self.view.addSubview(imageView)
+                        }
+                    }
+                })
+            }
+            
         }
         
     }
-    
-}
 }
 
 extension LeaguesDetialesViewController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -175,11 +185,9 @@ extension LeaguesDetialesViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView.tag {
         case 0:
-            //frist here
             print("first")
         case 1:
-            //events here
-            print("first")
+            print("scond")
         default:
             let team = self.teams![indexPath.row]
             pushToTeamDetailsView(team: team)
