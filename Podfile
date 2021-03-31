@@ -8,6 +8,7 @@ target 'SportsApp' do
 pod 'Alamofire', '~> 4.8'
 pod 'ReachabilitySwift'
 pod 'SDWebImage'
+pod 'ANActivityIndicator'
 
 end
 

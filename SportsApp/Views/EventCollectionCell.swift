@@ -30,17 +30,23 @@ class EventCollectionCell: UICollectionViewCell {
     
     func displayImgs(teamAURL: String?, teamBURL: String?) {
         if(teamAURL != nil){
-            self.imageTeamA.sd_setImage(with: URL(string: teamAURL!), placeholderImage: UIImage(named: "2"))
+            self.imageTeamA.sd_setImage(with: URL(string: teamAURL!), placeholderImage: UIImage(named: "no"))
         }else{
-            self.imageTeamA.image = UIImage(named: "2")
+            self.imageTeamA.image = UIImage(named: "no")
         }
         
         if(teamBURL != nil){
             
-            self.imageTeamB.sd_setImage(with: URL(string: teamBURL!), placeholderImage: UIImage(named: "2"))
+            self.imageTeamB.sd_setImage(with: URL(string: teamBURL!), placeholderImage: UIImage(named: "no"))
         }else{
-            self.imageTeamB.image = UIImage(named: "2")
+            self.imageTeamB.image = UIImage(named: "no")
         }
+        self.imageTeamB.layer.cornerRadius = self.imageTeamB.frame.size.width/3
+        self.imageTeamB.layer.borderWidth = 2
+        self.imageTeamB.layer.borderColor = UIColor(named: "background")?.cgColor
+        self.imageTeamA.layer.cornerRadius = self.imageTeamA.frame.size.width/3
+        self.imageTeamA.layer.borderWidth = 2
+        self.imageTeamA.layer.borderColor = UIColor(named: "background")?.cgColor
     }
     
     func displayNames(teamA: String, teamB: String) {
@@ -66,9 +72,9 @@ class EventCollectionCell: UICollectionViewCell {
         self.teamAResView.layer.cornerRadius = self.teamAResView.frame.size.width/2
         self.teamBResView.layer.cornerRadius = self.teamBResView.frame.size.width/2
         self.teamAResView.layer.borderWidth = 1
-        self.teamAResView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 0.25)
+        self.teamAResView.layer.borderColor = UIColor(named: "dark")?.cgColor
         self.teamBResView.layer.borderWidth = 1
-        self.teamBResView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 0.25)
+        self.teamBResView.layer.borderColor = UIColor(named: "dark")?.cgColor
         
         self.teamAResView.isHidden = false
         self.teamBResView.isHidden = false

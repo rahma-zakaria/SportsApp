@@ -18,9 +18,13 @@ class SocialViewController: UIViewController {
         if socialLink.isEmpty {
             print("\n\n is empty")
             // image here to show no link 
-            let newView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-                newView.backgroundColor = UIColor.red
-                view.addSubview(newView)
+          //  let newView = UIView(frame: view.frame)
+              //  newView.backgroundColor = UIColor.red
+            let image = UIImage(named: "notFound")
+            let imageView = UIImageView(image: image!)
+            imageView.frame = view.frame
+            view.addSubview(imageView)
+           // view.addSubview(newView)
         }
         let myURL = URL(string: "https://\(socialLink)")
          print(socialLink)

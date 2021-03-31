@@ -71,8 +71,8 @@ extension FavoriteViewController :UITableViewDelegate, UITableViewDataSource{
         cell.setUpLeaguesTableCell(leagueName: name, imageName: image, youtubeLink: youtubeLink)
         
         cell.layer.borderWidth = 4
-        cell.layer.borderColor = UIColor(named: "border")?.cgColor
-        cell.backgroundColor = UIColor(named: "background")
+        cell.layer.borderColor = UIColor(named: "light")?.cgColor
+        cell.backgroundColor = UIColor(named: "light")
         cell.layer.cornerRadius = 32
         cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner,.layerMaxXMinYCorner]
         

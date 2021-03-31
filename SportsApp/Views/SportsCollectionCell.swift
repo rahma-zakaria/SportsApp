@@ -18,7 +18,7 @@ class SportsCollectionCell: UICollectionViewCell {
         sportNameLabel.text = sportName
         sportImage.sd_setImage(with: URL(string: imageName), placeholderImage: UIImage(named: "no"))
         
-        nameLabelView.backgroundColor = UIColor(named: "border")?.withAlphaComponent(0.8)
+        nameLabelView.backgroundColor = UIColor(named: "light")?.withAlphaComponent(0.8)
         nameLabelView.layer.cornerRadius = 20
         nameLabelView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         

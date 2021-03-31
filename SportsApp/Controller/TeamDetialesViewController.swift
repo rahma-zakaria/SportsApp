@@ -23,6 +23,8 @@ class TeamDetialesViewController: UIViewController {
     
     func setupView(){
         teamLogoImage.layer.cornerRadius = teamLogoImage.frame.size.height/2
+        teamLogoImage.layer.borderWidth = 2
+        teamLogoImage.layer.borderColor = UIColor(named: "light")?.cgColor
         if let team = self.team {
             if let teamImgUrl = team["strTeamLogo"]{
                 let img = NSURL(string: teamImgUrl ?? "")! as URL

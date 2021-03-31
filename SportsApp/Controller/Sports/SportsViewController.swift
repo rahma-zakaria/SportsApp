@@ -20,12 +20,14 @@ class SportsViewController: UIViewController {
     
     let sportsUrl = "https://www.thesportsdb.com/api/v1/json/1/all_sports.php"
     var sports = [Sports]()
+    let indicator = Indicator()
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.title = "Sports"
         self.sportsCollection.backgroundColor = UIColor(named: "background")
-        
+        self.indicator.startAnimating(view: self.view)
+    }
+    override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.global(qos: .background).async {
             ApiModal.instance.getData(url: self.sportsUrl, completion:{(mySports: SportsModel?,error) in
                 if let myError = error{
@@ -36,12 +38,11 @@ class SportsViewController: UIViewController {
                     self.sports = mySport
                     DispatchQueue.main.async {
                         self.sportsCollection.reloadData()
+                        self.indicator.stopAnimating()
                     }
                 }
             })
         }
-    }
-    override func viewWillAppear(_ animated: Bool) {
         reachability.whenReachable = { reachability in
             self.tabBarController?.selectedIndex = 0
         }
@@ -69,9 +70,15 @@ extension SportsViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let name = sports[indexPath.row].strSport!
         let image = sports[indexPath.row].strSportThumb!
         cell.setUpSportsCollectionCell(sportName: name, imageName: image)
+        
+        let rectShape = CAShapeLayer()
+        rectShape.bounds = cell.frame
+        rectShape.position = cell.center
+        rectShape.path = UIBezierPath(roundedRect: cell.bounds, byRoundingCorners: [.bottomRight, .topLeft], cornerRadii: CGSize(width: 20, height: 20)).cgPath
+        cell.layer.mask = rectShape
         cell.layer.borderWidth = 4
-        cell.layer.borderColor = UIColor(named: "border")?.cgColor
-        cell.layer.cornerRadius = 40
+        cell.layer.borderColor = UIColor(named: "light")?.cgColor
+        cell.layer.cornerRadius = cell.frame.width/4
         cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMinYCorner]
         
         return cell

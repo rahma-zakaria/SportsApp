@@ -38,6 +38,7 @@ class LeaguesTableCell: UITableViewCell {
         leagueIView!.clipsToBounds = true
         
         leagueNameLabel.text = leagueName
+       // leagueNameLabel.textColor = UIColor(named: "light")
         leagueImage.sd_setImage(with: URL(string: imageName), placeholderImage: UIImage(named: "no"))
         self.youtubeLink = youtubeLink
     }

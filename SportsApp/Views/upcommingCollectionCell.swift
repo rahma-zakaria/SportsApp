@@ -23,16 +23,15 @@ class upcommingCollectionCell: UICollectionViewCell {
     
     func displayImgs(teamAURL: String?, teamBURL: String?) {
         if(teamAURL != nil){
-            self.imageTeamA.sd_setImage(with: URL(string: teamAURL!), placeholderImage: UIImage(named: "2"))
+            self.imageTeamA.sd_setImage(with: URL(string: teamAURL!), placeholderImage: UIImage(named: "no"))
         }else{
-            self.imageTeamA.image = UIImage(named: "2")
+            self.imageTeamA.image = UIImage(named: "no")
         }
         
         if(teamBURL != nil){
-            
-            self.imageTeamB.sd_setImage(with: URL(string: teamBURL!), placeholderImage: UIImage(named: "2"))
+            self.imageTeamB.sd_setImage(with: URL(string: teamBURL!), placeholderImage: UIImage(named: "no"))
         }else{
-            self.imageTeamB.image = UIImage(named: "2")
+            self.imageTeamB.image = UIImage(named: "no")
         }
     }
     

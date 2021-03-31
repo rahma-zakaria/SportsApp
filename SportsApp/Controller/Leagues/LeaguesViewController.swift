@@ -20,12 +20,13 @@ class LeaguesViewController: UIViewController {
     let leaguesUrl = "https://www.thesportsdb.com/api/v1/json/1/all_leagues.php"
     let leagueDetailes = "https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id="
     var leagues = [LeaguesInfoModel]()
+    let indicator = Indicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = sportName
         self.leaguesTabelView.backgroundColor = UIColor(named: "background")
-        leaguesTabelView.separatorColor = .none
+        indicator.startAnimating(view: view)
         DispatchQueue.global(qos: .background).async {
             ApiModal.instance.getData(url: self.leaguesUrl, completion:{(myLeague: LeaguesModel?,error) in
                 if let myError = error{
@@ -43,6 +44,7 @@ class LeaguesViewController: UIViewController {
                     self.getMoreInfo()
                     DispatchQueue.main.async {
                         self.leaguesTabelView.reloadData()
+                        self.indicator.stopAnimating()
                     }
                 }
             })
@@ -94,8 +96,8 @@ extension LeaguesViewController :UITableViewDelegate, UITableViewDataSource{
         cell.setUpLeaguesTableCell(leagueName: name, imageName: image, youtubeLink: youtubeLink)
         
         cell.layer.borderWidth = 4
-        cell.layer.borderColor = UIColor(named: "border")?.cgColor
-        cell.backgroundColor = UIColor(named: "background")
+        cell.layer.borderColor = UIColor(named: "light")?.cgColor
+        cell.backgroundColor = UIColor(named: "light")
         cell.layer.cornerRadius = 32
         cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner,.layerMaxXMinYCorner]
         

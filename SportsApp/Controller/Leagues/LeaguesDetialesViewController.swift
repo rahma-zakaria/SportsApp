@@ -23,6 +23,7 @@ class LeaguesDetialesViewController: UIViewController {
     let eventsUrl = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id="
     
     let coreData = CoreDataModel()
+    let indicator = Indicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +35,14 @@ class LeaguesDetialesViewController: UIViewController {
             favoriteButton.image = UIImage(systemName: "heart")
         }
         favoriteButton!.tintColor = .red
-        
         self.navigationItem.rightBarButtonItem = favoriteButton
-        
-        requestTeams()
-        requestEvents()
-        setupCollectionView()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.indicator.startAnimating(view: view)
+        setupCollectionView()
+        requestEvents()
+        requestTeams()
+    }
     
     @IBAction func favoriteAction(_ sender: UIBarButtonItem) {
         if coreData.isLeagueInFavorate(ID: (myLeague?.id)!) {
@@ -55,26 +56,28 @@ class LeaguesDetialesViewController: UIViewController {
         }
     }
     
-    
-    
-    
     func requestTeams(){
-        if let leagueName = myLeague?.name{
-            let url = teamsUrl + leagueName.replacingOccurrences(of: " ", with: "_")
-            print ("\n\n team")
-            print(url)
+        DispatchQueue.global(qos: .background).async {
+            if let leagueName = self.myLeague?.name{
+                let url = self.teamsUrl + leagueName.replacingOccurrences(of: " ", with: "_")
             ApiModal.instance.getData(url: url) { (myLeagueTeams: TeamsData?, error) in
+                if let myError = error{
+                    print(myError)
+                }else{
                 self.teams = myLeagueTeams?.teams
+            }
+            DispatchQueue.main.async {
                 self.teamsCV.reloadData()
+                self.indicator.stopAnimating()
             }
         }
+            }
+    }
     }
     func requestEvents(){
-        if let leagueId = myLeague?.id{
-            let url = eventsUrl + leagueId
-            print("\n\n\n")
-            print(url)
-            print("\n\n\n")
+        DispatchQueue.global(qos: .background).async {
+            if let leagueId = self.myLeague?.id{
+                let url = self.eventsUrl + leagueId
             ApiModal.instance.getData(url: url, completion:{(myEvents: EventsModel?,error) in
                 if let myError = error{
                     print(myError)
@@ -82,12 +85,19 @@ class LeaguesDetialesViewController: UIViewController {
                     guard let events = myEvents else {return}
                     guard let myEvent = events.events  else { return }
                     self.events = myEvent
+                   
+                }
+                DispatchQueue.main.async {
                     self.resultsCollection.reloadData()
                     self.upCommingCollection.reloadData()
+                    self.indicator.stopAnimating()
                 }
             })
         }
+        
     }
+    
+}
 }
 
 extension LeaguesDetialesViewController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -106,11 +116,8 @@ extension LeaguesDetialesViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
         case 0:
-            //frist here
             return events.count
         case 1:
-            //events here
-            print("in case 1 >>")
             return events.count
         default:
             if let teams = self.teams{
@@ -141,6 +148,9 @@ extension LeaguesDetialesViewController: UICollectionViewDelegate, UICollectionV
             eventCell.displayImgs(teamAURL: self.getTeamLogo(id: event.idHomeTeam ?? ""), teamBURL: self.getTeamLogo(id: event.idAwayTeam ?? ""))
             eventCell.displayNames(teamA: event.strHomeTeam ?? "", teamB: event.strAwayTeam ?? "")
             eventCell.displayDateTime(date: event.dateEvent, time: event.strTime)
+            eventCell.layer.borderWidth = 2
+            eventCell.layer.borderColor = UIColor(named: "light")?.cgColor
+            eventCell.layer.cornerRadius = 12
             return eventCell
         case 1:
             let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCollectionCell", for: indexPath) as! EventCollectionCell
@@ -155,6 +165,9 @@ extension LeaguesDetialesViewController: UICollectionViewDelegate, UICollectionV
             let teamCell: teamCell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! teamCell
             let team = self.teams![indexPath.row]
             teamCell.updateCell(teamName: team["strTeam"]! ?? "", teamImage: team["strTeamLogo"]! ?? "")
+            teamCell.layer.borderWidth = 4
+            teamCell.layer.borderColor = UIColor(named: "light")?.cgColor
+            teamCell.layer.cornerRadius = 10
             return teamCell
         }
     }
@@ -185,12 +198,12 @@ extension LeaguesDetialesViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView.tag {
         case 0:
-            return CGSize(width: collectionView.frame.size.width * 0.4, height: collectionView.frame.size.width * 0.3)
+            return CGSize(width: collectionView.frame.size.height * 1.2, height: collectionView.frame.size.height - 24)
         case 1:
             return CGSize(width: ((self.view.frame.size.width/2) - 16), height: (self.view.frame.size.width/3))
             
         default:
-            return CGSize(width: collectionView.frame.size.width * 0.3, height: collectionView.frame.size.width * 0.26)
+            return CGSize(width: collectionView.frame.size.width * 0.3, height: collectionView.frame.size.height - 24)
         }
         
     }
